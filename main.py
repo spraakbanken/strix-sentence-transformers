@@ -32,7 +32,7 @@ def encode_lines(out, input, model):
         out.write(f"{json.dumps([doc_id, vector], ensure_ascii=False)}\n")
 
 
-def run_file(file, out_dor, model):
+def run_file(file, out_dir, model):
     with open(file) as fp:
         with open(os.path.join(out_dir, os.path.basename(file)), "w") as fp_out:
             encode_lines(fp_out, fp, model)
