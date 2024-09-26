@@ -61,9 +61,7 @@ def main(corpus):
     # check that user has set a directory for the transformers data and create directory structure
     if "transformers_postprocess_dir" not in config:
         raise RuntimeError("transformers_postprocess_dir not set in config")
-    out_dir = os.path.join(
-        config["transformers_postprocess_dir"], corpus, "vectors"
-    )
+    out_dir = os.path.join(config["transformers_postprocess_dir"], corpus, "vectors")
     try:
         shutil.rmtree(out_dir)
     except FileNotFoundError:
@@ -76,9 +74,7 @@ def main(corpus):
         """
         processes = []
         for n, chunk in chunkify(files, torch.cuda.device_count()):
-            p = torch.multiprocessing.Process(
-                target=run, args=(n, chunk, out_dir)
-            )
+            p = torch.multiprocessing.Process(target=run, args=(n, chunk, out_dir))
             p.start()
             processes.append(p)
         for p in processes:
