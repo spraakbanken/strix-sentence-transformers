@@ -73,7 +73,8 @@ def main(corpus):
         If there are GPUs available, split the input files into chunks and run each set on a distinct GPU 
         """
         processes = []
-        for n, chunk in chunkify(files, torch.cuda.device_count()):
+	# disable running on many GPUs
+        for n, chunk in chunkify(files, 1): # torch.cuda.device_count()):
             p = torch.multiprocessing.Process(target=run, args=(n, chunk, out_dir))
             p.start()
             processes.append(p)
