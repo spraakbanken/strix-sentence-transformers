@@ -81,8 +81,9 @@ def main(corpus):
         for p in processes:
             p.join()
     else:
+        model = create_model("cpu")
         for file in files:
-            run_file(file, out_dir, create_model("cpu"))
+            run_file(file, out_dir, model)
 
 
 if __name__ == "__main__":
